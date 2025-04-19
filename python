@@ -1,0 +1,100 @@
+
+# Game Title: The Lost Map
+
+# Importing required modules
+import time
+
+# Game variables
+locations = {
+    "Location 1": "Old Mansion",
+    "Location 2": "Dark Room",
+    "Location 3": "Garden",
+    "Location 4": "Library",
+    "Location 5": "Attic"
+}
+
+items = {
+    "Location 2": "Key",
+    "Location 3": "Flashlight",
+    "Location 4": "Map Piece 1",
+    "Location 5": "Map Piece 2"
+}
+
+player_location = "Location 1"
+player_inventory = []
+
+# Game loop
+while True:
+    # Display current location
+    print(f"\nYou are in the {locations[player_location]}")
+
+    # Display available actions
+    if player_location == "Location 1":
+        print("You see a door to the north (Location 2) and a window to the east (Location 3)")
+        action = input("What do you want to do? (A) Go north, (B) Go east, (C) Search: ")
+    elif player_location == "Location 2":
+        print("You see a door to the south (Location 1) and a door to the west (Location 4)")
+        if "Key" not in player_inventory:
+            print("You found a Key!")
+            player_inventory.append("Key")
+        action = input("What do you want to do? (A) Go south, (B) Go west, (C) Search: ")
+    elif player_location == "Location 3":
+        print("You see a door to the west (Location 1) and a door to the north (Location 5)")
+        if "Flashlight" not in player_inventory:
+            print("You found a Flashlight!")
+            player_inventory.append("Flashlight")
+        action = input("What do you want to do? (A) Go west, (B) Go north, (C) Search: ")
+    elif player_location == "Location 4":
+        print("You see a door to the east (Location 2)")
+        if "Map Piece 1" not in player_inventory:
+            print("You found Map Piece 1!")
+            player_inventory.append("Map Piece 1")
+        action = input("What do you want to do? (A) Go east, (B) Search: ")
+    elif player_location == "Location 5":
+        print("You see a door to the south (Location 3)")
+        if "Map Piece 2" not in player_inventory:
+            print("You found Map Piece 2!")
+            player_inventory.append("Map Piece 2")
+        action = input("What do you want to do? (A) Go south, (B) Search: ")
+
+    # Handle player actions
+    if player_location == "Location 1":
+        if action.lower() == "a":
+            player_location = "Location 2"
+        elif action.lower() == "b":
+            player_location = "Location 3"
+        elif action.lower() == "c":
+            print("You didn't find anything.")
+    elif player_location == "Location 2":
+        if action.lower() == "a":
+            player_location = "Location 1"
+        elif action.lower() == "b":
+            player_location = "Location 4"
+        elif action.lower() == "c":
+            print("You didn't find anything.")
+    elif player_location == "Location 3":
+        if action.lower() == "a":
+            player_location = "Location 1"
+        elif action.lower() == "b":
+            player_location = "Location 5"
+        elif action.lower() == "c":
+            print("You didn't find anything.")
+    elif player_location == "Location 4":
+        if action.lower() == "a":
+            player_location = "Location 2"
+        elif action.lower() == "b":
+            print("You didn't find anything.")
+    elif player_location == "Location 5":
+        if action.lower() == "a":
+            player_location = "Location 3"
+        elif action.lower() == "b":
+            print("You didn't find anything.")
+
+    # Check if player has all map pieces
+    if "Map Piece 1" in player_inventory and "Map Piece 2" in player_inventory:
+        print("\nCongratulations! You found the map pieces and escaped!")
+        break
+
+    # Display player inventory
+    print(f"\nYour inventory: {player_inventory}")
+    time.sleep(1)
